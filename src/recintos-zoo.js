@@ -85,11 +85,11 @@ class VerificadorDeRecintos {
           if (contidadeDeAnimais) {
             // conta o espaco sobrando no recinto
             let espacoSobrandoNoRecinto = 0;
-            for (const animal of recinto.animais) {
+            recinto.animais.forEach((animal) => {
               const espacoOcupadoNoRecinto = animal.tamanho * animal.quantidade;
               espacoSobrandoNoRecinto +=
                 recinto.tamanhoTotal - espacoOcupadoNoRecinto;
-            }
+            });
             // verifica se o espaco sobrando no recinto é menor que o espaco ocupado pela especie
             if (espacoSobrandoNoRecinto < espacoOcupadoPelaEspecie) continue;
             contidadeSobrandoAposAdicionar =
