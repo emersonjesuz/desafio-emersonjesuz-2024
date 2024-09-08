@@ -3,24 +3,19 @@ import { recintos } from "./recintos";
 
 class RecintosZoo {
   analisaRecintos(especie, quantidade) {
+    const lancarErro = new GeradorDeMensagenDeErro();
     if (!especie || !especie.trim()) {
-      return {
-        erro: "Animal inválido",
-      };
+      return lancarErro.lancarMensagemDeErro("Animal inválido");
     }
 
     if (typeof quantidade !== "number" || quantidade <= 0) {
-      return {
-        erro: "Quantidade inválida",
-      };
+      return lancarErro.lancarMensagemDeErro("Quantidade inválida");
     }
     const verificadorDeAnimais = new VerificadorDeAnimais();
     const animalExiste = verificadorDeAnimais.analisarAnimal(especie);
 
     if (!animalExiste) {
-      return {
-        erro: "Animal inválido",
-      };
+      return lancarErro.lancarMensagemDeErro("Animal inválido");
     }
     const verificadorDeRecintos = new VerificadorDeRecintos();
     const recintosEncontrado = verificadorDeRecintos.espacosEmRecintos(
@@ -30,20 +25,16 @@ class RecintosZoo {
     );
 
     if (!recintosEncontrado.length) {
-      return {
-        erro: "Não há recinto viável",
-      };
+      return lancarErro.lancarMensagemDeErro("Não há recinto viável");
     }
 
-    const interacaoDosAnimais = new VerificadorDeRecintos().especiesPorRecinto(
+    const interacaoDosAnimais = verificadorDeRecintos.especiesPorRecinto(
       animalExiste,
       recintosEncontrado
     );
 
     if (!interacaoDosAnimais.length) {
-      return {
-        erro: "Não há recinto viável",
-      };
+      return lancarErro.lancarMensagemDeErro("Não há recinto viável");
     }
     const recintosOrdenados =
       new OrdenadorDeRecintos().ordenarRecintosPorEspacoLivre(
@@ -79,10 +70,10 @@ class VerificadorDeRecintos {
         if (recinto.biomas.includes(bioma)) {
           // verifica se o espaço total do recinto é menor que o espaco ocupado pela especie
           if (recinto.tamanhoTotal < espacoOcupadoPelaEspecie) continue;
-          let contidadeSobrandoAposAdicionar = 0;
+          let quantidadeSobrandoAposAdicionar = 0;
           // verifica se o recinto tem animais
-          const contidadeDeAnimais = recinto.animais.length;
-          if (contidadeDeAnimais) {
+          const quantidadeDeAnimais = recinto.animais.length;
+          if (quantidadeDeAnimais) {
             // conta o espaco sobrando no recinto
             let espacoSobrandoNoRecinto = 0;
             for (const animal of recinto.animais) {
@@ -92,16 +83,16 @@ class VerificadorDeRecintos {
             }
             // verifica se o espaco sobrando no recinto é menor que o espaco ocupado pela especie
             if (espacoSobrandoNoRecinto < espacoOcupadoPelaEspecie) continue;
-            contidadeSobrandoAposAdicionar =
+            quantidadeSobrandoAposAdicionar =
               espacoSobrandoNoRecinto - espacoOcupadoPelaEspecie;
           } else {
-            contidadeSobrandoAposAdicionar =
+            quantidadeSobrandoAposAdicionar =
               recinto.tamanhoTotal - espacoOcupadoPelaEspecie;
           }
           //   adiconar recinto em todosRecintosComBioma
           todosRecintosEncontrados.push({
             ...recinto,
-            espacoLivre: contidadeSobrandoAposAdicionar,
+            espacoLivre: quantidadeSobrandoAposAdicionar,
           });
         }
       }
@@ -167,6 +158,12 @@ class FormatadorDeRecintos {
     return recintos.map((recinto) => {
       return `Recinto ${recinto.numero} (espaço livre: ${recinto.espacoLivre} total: ${recinto.tamanhoTotal})`;
     });
+  }
+}
+
+class GeradorDeMensagenDeErro {
+  lancarMensagemDeErro(erro) {
+    return { erro };
   }
 }
 
