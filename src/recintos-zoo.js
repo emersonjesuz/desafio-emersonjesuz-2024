@@ -23,7 +23,7 @@ class RecintosZoo {
       };
     }
     const verificadorDeRecintos = new VerificadorDeRecintos();
-    const recintosEncontrado = verificadorDeRecintos.checarEspacosEmRecintos(
+    const recintosEncontrado = verificadorDeRecintos.espacosEmRecintos(
       animalExiste.tamanho,
       quantidade,
       animalExiste.biomas
@@ -35,11 +35,10 @@ class RecintosZoo {
       };
     }
 
-    const interacaoDosAnimais =
-      new VerificadorDeRecintos().checarEspeciesPorRecinto(
-        animalExiste,
-        recintosEncontrado
-      );
+    const interacaoDosAnimais = new VerificadorDeRecintos().especiesPorRecinto(
+      animalExiste,
+      recintosEncontrado
+    );
 
     if (!interacaoDosAnimais.length) {
       return {
@@ -70,7 +69,7 @@ class VerificadorDeAnimais {
 }
 
 class VerificadorDeRecintos {
-  checarEspacosEmRecintos(tamanhoAnimal, quantidade, biomas) {
+  espacosEmRecintos(tamanhoAnimal, quantidade, biomas) {
     const todosRecintosEncontrados = [];
     const espacoOcupadoPelaEspecie = tamanhoAnimal * quantidade;
 
@@ -111,7 +110,7 @@ class VerificadorDeRecintos {
     return todosRecintosEncontrados;
   }
 
-  checarEspeciesPorRecinto(animal, recintos) {
+  especiesPorRecinto(animal, recintos) {
     let todosRecintosVerificados = [];
     for (const recinto of recintos) {
       let espacoLivre = recinto.espacoLivre;
@@ -165,7 +164,7 @@ class OrdenadorDeRecintos {
 
 class FormatadorDeRecintos {
   formatarRecintos(recintos) {
-    return recintos.map((recinto, index) => {
+    return recintos.map((recinto) => {
       return `Recinto ${recinto.numero} (espaço livre: ${recinto.espacoLivre} total: ${recinto.tamanhoTotal})`;
     });
   }
