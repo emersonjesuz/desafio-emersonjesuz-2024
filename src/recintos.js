@@ -1,52 +1,52 @@
-export const recintos = [
+export const Enclosures = [
   {
-    numero: 1,
-    tamanhoTotal: 10,
-    biomas: ["savana"],
-    animais: [
+    number: 1,
+    lengthTotal: 10,
+    biomes: ["savana"],
+    animals: [
       {
-        especie: "MACACO",
-        quantidade: 3,
-        tamanho: 1,
-        carnivero: false,
+        specie: "MACACO",
+        quantity: 3,
+        length: 1,
+        carnivore: false,
       },
     ],
   },
   {
-    numero: 2,
-    tamanhoTotal: 5,
-    biomas: ["floresta"],
-    animais: [],
+    number: 2,
+    lengthTotal: 5,
+    biomes: ["floresta"],
+    animals: [],
   },
   {
-    numero: 3,
-    tamanhoTotal: 7,
-    biomas: ["savana", "rio"],
-    animais: [
+    number: 3,
+    lengthTotal: 7,
+    biomes: ["savana", "rio"],
+    animals: [
       {
-        especie: "GAZELA",
-        quantidade: 1,
-        tamanho: 2,
-        carnivero: false,
+        specie: "GAZELA",
+        quantity: 1,
+        length: 2,
+        carnivore: false,
       },
     ],
   },
   {
-    numero: 4,
-    tamanhoTotal: 8,
-    biomas: ["rio"],
-    animais: [],
+    number: 4,
+    lengthTotal: 8,
+    biomes: ["rio"],
+    animals: [],
   },
   {
-    numero: 5,
-    tamanhoTotal: 9,
-    biomas: ["savana"],
-    animais: [
+    number: 5,
+    lengthTotal: 9,
+    biomes: ["savana"],
+    animals: [
       {
-        especie: "LEAO",
-        quantidade: 1,
-        tamanho: 3,
-        carnivero: true,
+        specie: "LEAO",
+        quantity: 1,
+        length: 3,
+        carnivore: true,
       },
     ],
   },
